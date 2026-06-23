@@ -1,6 +1,6 @@
 """
-任务6：Sprite应用
-从TMX地图中读取对象位置，加载并绘制精灵
+任务6-7：Sprite应用 & Sprite在tmx地图上的配置与加载
+从TMX地图中读取对象层，加载并绘制精灵（玩家、NPC、障碍物）
 """
 import pygame
 import os
@@ -16,7 +16,7 @@ pygame.display.set_mode((1, 1))
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
-pygame.display.set_caption("西游记·观音院 - 任务6：Sprite应用")
+pygame.display.set_caption("西游记·观音院 - Task 6-7: Sprite应用")
 
 # 时钟
 clock = pygame.time.Clock()
@@ -61,9 +61,31 @@ def get_objects_by_layer(tmx_data, layer_name):
             objects.append({
                 'name': obj.name,
                 'x': obj.x,
-                'y': obj.y
+                'y': obj.y,
+                'width': getattr(obj, 'width', 0),
+                'height': getattr(obj, 'height', 0)
             })
     return objects
+
+def get_obstacles(tmx_data):
+    """获取所有障碍物（从obstacle图层）"""
+    obstacles = []
+    for obj in tmx_data.objects:
+        obj_group = getattr(obj, 'group', '')
+        if obj_group == 'obstacle':
+            # 矩形障碍物
+            if obj.width > 0 and obj.height > 0:
+                obstacles.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
+        elif obj_group == 'road':
+            # road图层中的多边形转换为矩形
+            if hasattr(obj, 'points') and obj.points:
+                points = obj.points
+                min_x = min(p[0] for p in points) + obj.x
+                min_y = min(p[1] for p in points) + obj.y
+                max_x = max(p[0] for p in points) + obj.x
+                max_y = max(p[1] for p in points) + obj.y
+                obstacles.append(pygame.Rect(min_x, min_y, max_x - min_x, max_y - min_y))
+    return obstacles
 
 # ========== 加载精灵图像 ==========
 def load_sprite_image(path, size=(64, 64)):
@@ -77,12 +99,12 @@ def load_sprite_image(path, size=(64, 64)):
         surf.fill((255, 0, 0, 128))
         return surf
 
-# ========== 从地图加载精灵 ==========
+# ========== 从地图加载所有精灵 ==========
 print("\n" + "=" * 50)
-print("从TMX地图加载精灵位置")
+print("Task 7: 从TMX地图对象层加载精灵")
 print("=" * 50)
 
-# 加载玩家精灵（孙悟空）
+# 1. 加载玩家精灵（孙悟空）
 player_pos = get_object_position(tmx_data, 'sun')
 if player_pos:
     print(f"[OK] 玩家（孙悟空）位置: ({player_pos[0]}, {player_pos[1]})")
@@ -92,7 +114,15 @@ else:
     player_pos = (400, 300)
     player_img = load_sprite_image('resource/img/swk/00000.tga')
 
-# 加载土地公
+# 2. 加载唐僧
+tang_pos = get_object_position(tmx_data, 'tang')
+if tang_pos:
+    print(f"[OK] 唐僧位置: ({tang_pos[0]}, {tang_pos[1]})")
+    tang_img = load_sprite_image('resource/img/elder/elder1-00000.tga')
+else:
+    print("[INFO] 未找到唐僧位置")
+
+# 3. 加载土地公
 god_pos = get_object_position(tmx_data, 'god')
 if god_pos:
     print(f"[OK] 土地公位置: ({god_pos[0]}, {god_pos[1]})")
@@ -102,7 +132,7 @@ else:
     god_pos = (600, 500)
     god_img = load_sprite_image('resource/img/god/0214-16505471-00000.tga')
 
-# 加载长老NPC
+# 4. 加载长老NPC
 elder_objects = get_objects_by_layer(tmx_data, 'elder')
 elder_images = []
 for elder in elder_objects:
@@ -115,12 +145,11 @@ for elder in elder_objects:
         'image': elder_img
     })
 
-# 加载孩子NPC
+# 5. 加载孩子NPC
 child_objects = get_objects_by_layer(tmx_data, 'child')
 child_images = []
 for child in child_objects:
     print(f"[OK] 孩子 {child['name']} 位置: ({child['x']}, {child['y']})")
-    # 使用长老图像作为占位符
     child_img = load_sprite_image('resource/img/elder/elder1-00000.tga')
     child_images.append({
         'name': child['name'],
@@ -129,7 +158,14 @@ for child in child_objects:
         'image': child_img
     })
 
-print(f"\n共加载 {1 + 1 + len(elder_images) + len(child_images)} 个精灵")
+# 6. 加载障碍物
+obstacles = get_obstacles(tmx_data)
+print(f"[OK] 障碍物数量: {len(obstacles)}")
+
+print(f"\n共加载精灵: 玩家1 + 土地公1 + 长老{len(elder_images)} + 孩子{len(child_images)} = {2 + len(elder_images) + len(child_images)} 个")
+
+# 显示障碍物开关
+show_obstacles = False
 
 # 游戏主循环
 running = True
@@ -140,6 +176,9 @@ while running:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 running = False
+            elif event.key == pygame.K_F1:
+                # F1切换障碍物显示
+                show_obstacles = not show_obstacles
 
     # 获取按键状态
     keys = pygame.key.get_pressed()
@@ -158,8 +197,18 @@ while running:
     # 绘制地图
     render_map(screen, tmx_data, camera_x, camera_y)
 
+    # 绘制障碍物（调试用，按F1切换）
+    if show_obstacles:
+        for obs in obstacles:
+            pygame.draw.rect(screen, (255, 0, 0),
+                           (obs.x - camera_x, obs.y - camera_y, obs.width, obs.height), 2)
+
     # 绘制玩家（孙悟空）
     screen.blit(player_img, (player_pos[0] - camera_x, player_pos[1] - camera_y))
+
+    # 绘制唐僧
+    if tang_pos:
+        screen.blit(tang_img, (tang_pos[0] - camera_x, tang_pos[1] - camera_y))
 
     # 绘制土地公
     screen.blit(god_img, (god_pos[0] - camera_x, god_pos[1] - camera_y))
@@ -179,11 +228,12 @@ while running:
         font = pygame.font.SysFont('arial', 20)
 
     info_texts = [
-        "Task 6: Sprite Application",
+        "Task 6-7: Sprite Application",
         f"Map: {map_width}x{map_height}",
         f"Player(sun): ({int(player_pos[0])}, {int(player_pos[1])})",
         f"God: ({int(god_pos[0])}, {int(god_pos[1])})",
         f"Elders: {len(elder_images)}, Children: {len(child_images)}",
+        f"Obstacles: {len(obstacles)} (F1: {'ON' if show_obstacles else 'OFF'})",
     ]
 
     for i, text in enumerate(info_texts):
