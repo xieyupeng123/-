@@ -24,7 +24,7 @@ class NPC(AnimatedSprite):
         self.current_axis = 'y'  # 当前移动轴
 
         # 加载动画帧（使用长老图像）
-        self.load_frames('down', 'resource/img/elder', 'elder1-000', 4)
+        self.load_frames('down', 'resource/img/elder', 'elder1-00', 4)
 
         # 设置初始图像
         if 'down' in self.frames and self.frames['down']:

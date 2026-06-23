@@ -19,7 +19,7 @@ def load_animation_frames(base_path, prefix, count, size=(64, 64)):
     """
     frames = []
     for i in range(count):
-        path = os.path.join(base_path, f"{prefix}{i:05d}.tga")
+        path = os.path.join(base_path, f"{prefix}{i:03d}.tga")
         if os.path.exists(path):
             img = pygame.image.load(path).convert_alpha()
             img = pygame.transform.scale(img, size)

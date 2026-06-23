@@ -21,10 +21,10 @@ class Player(AnimatedSprite):
         self.attack_power = attack
 
         # 加载4方向动画帧
-        self.load_frames('down', 'resource/img/swk', '0000', 4)
-        self.load_frames('up', 'resource/img/swk', '0100', 4)
-        self.load_frames('left', 'resource/img/swk', '0200', 4)
-        self.load_frames('right', 'resource/img/swk', '0300', 4)
+        self.load_frames('down', 'resource/img/swk', '00', 4)
+        self.load_frames('up', 'resource/img/swk', '01', 4)
+        self.load_frames('left', 'resource/img/swk', '02', 4)
+        self.load_frames('right', 'resource/img/swk', '03', 4)
 
         # 设置初始图像
         if 'down' in self.frames and self.frames['down']:
