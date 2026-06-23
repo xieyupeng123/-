@@ -1,0 +1,1488 @@
+[TOC]
+
+
+
+# 一. 课程简介及考核
+
+
+## 1 课程简介
+
+
+以简单的图像处理和应用为载体的项目训练，对专业基础要求较低，能比较全面的训练同学们的编程能力和软件开发的工程意识，并能增强后续学习的兴趣和动力。  
+Pygame是跨平台Python模块，专为电子游戏设计，包括图像、声音。建立在SDL基础上，允许实时电子游戏研发而无需被低级语言束缚， 开发者可以把精力放在游戏的架构上。这次实训利用Pygame设计完成一个简单的RPG游戏。在游戏中，玩家扮演虚拟世界中的一个或者几个特定角色在特定场景下进行游戏。本游戏的主角为孙悟空。故事为西游记中祸起观音院的故事，讲述孙悟空找到观音院的过程。
+
+<img src="https://cdn.nlark.com/yuque/0/2024/png/22579395/1716859075036-371bfc15-1511-4053-bc1c-4161454c817d.png" width="689" title="" crop="0,0,1,1" id="u86992f17" class="ne-image">
+
+## 2 课程内容
+
+
+1. 熟悉Python语言；
+2. 熟悉Pygame模块的使用
+3. 熟悉了解软件项目的开发流程；
+4. 使用面向对象的编程思想完成项目开发；
+
+
+
+## 3 考核要求
+
+
+**成绩构成**  
+平时小作业成绩 + 课堂分组讨论成绩 +文档成绩+答辩成绩
+
+
+
++ 小作业不少于3次（10分）
++ 课堂分组讨论不少于2次 （10分）
++ 文档撰写：需求文档，设计实现与测试文档（20分）
++ 答辩：（60分）
+
+
+
+## 4 时间安排
+
+
++ 集中学习：`6天`
++ 分散项目实现：`6天`
++ 答辩：`1天`
+
+| 秩序 | 时间 | 实践内容 | 对分易作业 | 项目实践 | 先导知识 |
+| --- | --- | --- | --- | --- | --- |
+| 第一天 | 上午 | 环境配置安装 背景图片的显示（1-2） | 在线练习1-2 | 有 | python基础 pygame基础 |
+| 第一天 | 下午 | Tiled的基本使用 PyTMX库的使用（3） | | 有 | |
+| 第二天 | 上午 | PyTMX库的使用（2）Tmx地图封装（4-5） | | 有 | |
+| 第二天 | 下午 | Sprite应用  Sprite对象运动行为（6） | | 有 | |
+| 第三天 | 上午 | Sprite在Tmx地图上的配置于加载（7） | 需求讨论 --需求文档 | 有 | 需求文档撰写讲解 |
+| 第三天 | 下午 | 玩家主角的设计 玩家键盘操作（8-12） | 进度作业1 | 有 | |
+| 第四天 | 上午 | 场景窗体与玩家的移动 场景窗体与玩家的移动 精灵碰撞（13-14） | | 有 | |
+| 第四天 | 下午 | 玩家与障碍物的碰撞 玩家与NPC的碰撞与交互（15，17） | | 有 | |
+| 第五天 | 上午 | 对话框的实现 场景切换渐入渐出（16，18-20）） | 进度作业2 | 有 | |
+| 第五天 | 下午 | 第二个场景建立与过渡的实现 打斗NPC人物的实现 玩家打斗人物的实现（21-23） | | 有 | |
+| 第六天 | 上午 | 打斗场景的设计 打斗场景的应用（24） | 测试讨论 --设计测试文档撰写 | 有 | 设计测试文档撰写讲解 |
+| 第六天 | 下午 | 游戏状态（25-26） | 进度作业3 | 有 | |
+
+
+
+
+# 二. 基础知识
+
+
+## 1 Python基础简介
+
+
+### 1. 简介
+
+
+ 了解Python语言基本的程序语句结构。
+
+
+
+### 2. 知识点
+
+
++ Python语言特点
++ Python语言主要程序语句结构  **<u><重点></u>**
+
+
+
+## 2 Pygame简介及安装
+
+
+### 1. 简介
+
+
+Pygame是跨平台Python模块，专为电子游戏设计，包括图像、声音。建立在SDL（Simple DirectMedia Layer）的基础上，允许实时电子游戏研发而无需被低级语言束缚， 开发者可以把精力放在游戏的架构上。这部分还需了解Pygame中几个重要的模块各自的作用。
+
+
+
+### 2. 应用场景
+
+
+Pygame更致力于2D游戏的开发，也就是说，你可以用Pygame写一个植物大战僵尸，但是写一个魔兽世界则相当困难……请不要做出鄙夷的目光，底层的东西永远是相通的，而且对于新手而言，从简单的2D入手才是正途。
+
+
+
+### 3.模块简介
+| 模块名 | 功能 | 模块名 | 功能 |
+| --- | --- | --- | --- |
+| pygame.cdrom | 访问光驱 | pygame.cursors | 加载光标 |
+| pygame.display | 访问设备显示 | pygame.draw | 绘制形状、线和点 |
+| pygame.event | 管理事件 | pygame.font | 使用字体 |
+| pygame.image | 加载和存储图片 | pygame.joystick | 使用手柄或类似的东西 |
+| pygame.key | 读取键盘按键 | pygame.mixer | 声音 |
+| pygame.mouse | 鼠标 | pygame.movie | 播放视频 |
+| pygame.music | 播放音频 | pygame.overlay | 访问高级视频叠加 |
+| pygame.rect | 管理矩形区域 | pygame.sndarray | 操作声音数据 |
+| pygame.sprite | 操作移动图像 | pygame.surface | 管理图像和屏幕 |
+| pygame.surfarray | 管理点阵图像数据 | pygame.time | 管理时间和帧信息 |
+| pygame.transform | 缩放和移动图像 | | |
+
+
+
+
+## 3 软件工程基础知识
+
+
+### 1. 软件需求
+
+
+```plain
+   需求来源于用户的一些“需要”，这些“需要”被分析、确认后形成完整的文档，该文档详细地说明了产品“必须或应当”做什么。
+```
+
+---
+
+```plain
+1. 需求分析的任务是要准确地定义新系统的目标，准确回答“系统必须做什么”的问题，并用需求规格说明书规范的形式准确地表达用户的需求。
+2. 需求分析是理解、分析和表达“系统必须做什么”的过程。
+3. 需求分析的结果是否正确，关系到软件开发的成败和软件产品的质量，正确的需求分析是整个系统开发的基础。
+```
+
+
+
+### 2. 软件设计
+
+
+```plain
+软件设计解决软件系统“怎么做”的问题。程序设计是软件设计的编码实现过程。
+```
+
+---
+
+```plain
+软件设计内容：体系结构 模块设计 数据结构与算法 用户界面
+```
+
+
+
+### 3. 软件测试技术
+
+
+```plain
+软件测试定义：使用人工或者自动手段来运行或者测试被测试件的过程，其目的在于检验它是否满足规定的需求并弄清预期结果与实际结果之间的差别。
+```
+
+---
+
+黑盒测试（Black-box Testing）,又叫功能测试，数据驱动测试或基于规格说明的测试。
+
+---
+
+```plain
+测试用例是为某个特定测试目标而设计的，它是测试操作过程序列、条件、期望结果及相关数据的一个特定的集合。
+```
+
+---
+
+```plain
+缺陷：软件产品预期属性的偏离现象（最终产品同用户的期望不一致）
+```
+
+
+
+## 4 需求文档的撰写
+
+
+### 1. 文档模版
+
+
+```plain
+对分易下载。
+```
+
+
+
+### 2. 撰写注意点
+
+
+## 5 设计与测试文档的撰写
+
+
+### 1. 文档模版
+
+
+```plain
+对分易下载。
+```
+
+
+
+### 2. 撰写注意点
+
+
+# 三. 《西游记观音院》项目实践
+
+
+## 1 环境配置安装
+
+
+### 1. 问题引入
+
+
+在前面的课程中我们并没有接触到过GUI编程，如果让我们的程序有界面，并能显示呢？
+
+
+
+### 2. 简介
+
+
+掌握Python3.0及以上与PyCharm的配置。
+
+
+
+### 3. 知识点
+
+
+```plain
+PyCharm中解释器设置。
+```
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+1、使用PyCharm并配置好Python解释器。  
+2、PyCharm镜像设置  
+（菜单）file ->（子菜单）setting->（左边树，可以筛选）Python Interpreter ->（右边栏的加号）+->（下方按钮）Manage Repositories  
+python 镜像：  
+清华：[https://pypi.tuna.tsinghua.edu.cn/simple](https://pypi.tuna.tsinghua.edu.cn/simple)  
+阿里云：[http://mirrors.aliyun.com/pypi/simple/](http://mirrors.aliyun.com/pypi/simple/)  
+中国科技大学 [https://pypi.mirrors.ustc.edu.cn/simple/](https://pypi.mirrors.ustc.edu.cn/simple/)
+
+
+
+3、在IDE中安装Pygame。  
+4、运行示例代码，能够显示图像。
+
+
+
+```python
+import os 
+import pygame
+from pygame.constants import QUIT
+
+pygame.init()
+background_image = os.path.join('../resource', 'img', 'village.jpg')
+screen = pygame.display.set_mode((800, 600), 0, 32)
+background = pygame.image.load(background_image).convert()
+while True:    
+    for event in pygame.event.get():
+        if event.type == QUIT:            
+            exit()
+    screen.blit(background, (0, 0)) 
+    pygame.display.update()
+```
+
+
+
+#### 扩展任务
+
+
+无
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#k5Rnk)
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#fvDpK)
+
+## 2 背景图片的显示
+
+
+### 1. 问题引入
+
+
+如何通过窗口显示图片？
+
+
+
+### 2. 简介
+
+
++ Pygame屏幕绘制机制简介
++ Pygame屏幕尺寸和模式设置 **<u>重点</u>**
++ Pygame窗口标题和图标设置
++ Pygame窗口感知和刷新运用**<u>重点</u>**
+
+
+
+### 3. 知识点
+
+
+```plain
+pygame.display.set_mode()
+pygame.display.set_caption()
+pygame.display.update()
+pygame.image.load
+```
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+实现游戏背景图片的显示
+
+
+
+#### 扩展任务
+
+
+全屏显示背景图片
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#ISKiF)
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#Iw0ia)
+
+## 3 Tiled的基本使用
+
+
+### 1. 问题引入
+
+
+很多游戏特别是RPG游戏中背景的制作是如何完成的，怎么样生成那些复杂游戏背景？
+
+
+
+### 2. 简介
+
+
+TiledMap是一款地图编辑器。我们常用它编辑一些相似度很大的背景,例如:超级玛丽的地图、天天酷跑、COC等。这些游戏的地图都有一个共同点那么就是有很多相同的色块组成。如果用纯代码取拼接那会很复杂，如果用TileMap去制做一个地图，那么运用起来就很简单。
+
+
+
+### 3. 知识点
+
+
++ 图层定义 **<u>重点</u>**
++ 图块资源
++ 图块层布局
++ 对象层 **<u>重点</u>**
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+使用Tiled查看我们例程中的地图，理解该地图中的图层，以及对象层。
+
+
+
+#### 扩展任务
+
+
+可以根据自己的想要实现的RPG游戏自行设计瓦格地图。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#Hpjdr)
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#d8XOn)
+
+
+
+## 4 pytmx库的使用
+
+
+### 1. 问题引入
+
+
+Python中如何将Tiled制作的Tmx格式的背景图像导入到游戏中。
+
+
+
+### 2. 简介
+
+
+讲解pytmx库的使用，和官方tiled_render.py文件的讲解与使用。  
+[pytmx的github地址](https://github.com/bitcraft/PyTMX)  
+[官方范例](https://github.com/bitcraft/PyTMX/blob/master/apps/pygame_demo.py)
+
+
+
+### 3. 知识点
+
+
++ pytmx库
++ tiled_render.py中渲染函数
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+将老师提供的tmx格式地图绘制在屏幕上。
+
+
+
+#### 扩展任务
+
+
+将自己制作的tmx格式地图绘制在屏幕上。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#FvYZl)
+
+## 5 Txm地图封装
+
+
+### 1. 问题引入
+
+
+游戏的地图是比较复杂的一个设计环节，如何在设计初期，设计完成一个比较容易复用的结构？
+
+
+
+### 2. 简介
+
+
+将tmx地图形成设计创建一个类来实现，后续可以复用该类完成tmx地图的相应功能。
+
+
+
+### 3. 知识点
+
+
++ 类的创建  **<u>重点</u>**
++ 类的构造函数  **<u>重点</u>**
++ 类的成员变量  **<u>重点</u>**
++ 类的成员函数  **<u>重点</u>**
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+将tmx地图设计成一个类，进行封装，然后使用对象把功能实现。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#xGFf2)
+
+#### 扩展任务
+
+
+将游戏主要的循环流程也封装成一个类，与地图类一起实现简单显示地图的功能。
+
+## 6 Sprite 应用
+
+
+### 1. 问题引入
+
+
+游戏中玩家，以及相应的NPC是如何设计实现的？他们有哪些共同特点？
+
+
+
+### 2. 简介
+
+
+Sprite基类的基本使用
+
+
+
+### 3. 知识点
+
+
++ 什么是精灵
++ 创建一个精灵 **<u>重点</u>**
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+将玩家精灵绘制在地图上。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#E2Tt3)
+
+#### 扩展任务
+
+
+将多个精灵对象与玩家一起绘制在地图上。
+
+## 7 Sprite在tmx地图上的配置与加载
+
+
+### 1. 问题引入
+
+
+游戏中的那些NPC和玩家的位置往往是在地图中事先规划好的，这个是如何做到的？
+
+
+
+### 2. 简介
+
+
+利用规划好的瓦格地图来对地图上的精灵对象加载与绘制。
+
+
+
+### 3. 知识点
+
+
++ 进一步理解Tile的对象
++ 利用对象层进行精灵对象的加载与绘制**<u>重点</u>**
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+利用瓦格地图中对象层加载并绘制玩家。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#Vvde9)
+
+#### 扩展任务
+
+
+利用自己制作的瓦格地图中对象层加载并绘制玩家以及其他NPC。
+
+## 8 Sprite对象自主运动
+
+
+### 1. 问题引入
+
+
+在游戏中角色的运动是如何实现的？动画效果是如何产生的？
+
+
+
+### 2. 简介
+
+
+精灵对象的运动是由位置改变来实现的，而精灵对象的动画效果是由对象的帧图像的变化来实现的。
+
+
+
+### 3. 知识点
+
+
++ 位置变化**<u>重点</u>**
++ 帧图像变化**<u>重点</u>**
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+实现玩家精灵的自主运动
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#IFVQY)
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#KvE8c)
+
+#### 扩展任务
+
+
+实现玩家以及NPC的自主运动。
+
+
+
+## 9 其他精灵封装
+
+
+### 1. 问题引入
+
+
+其他角色的加入是如何实现的？
+
+
+
+### 2. 简介
+
+
+这一部分将其他角色进行抽象，加入到游戏中，形成游戏结构。
+
+
+
+### 3. 知识点
+
+
++ 巩固精灵对象的设计与实现
++ 创建其他角色的对应精灵类
++ 设计运动与动画实现的函数。
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+实现所有角色自主运动的动画实现。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#KndtT)
+
+#### 扩展任务
+
+
+无
+
+## 10 动画效果类的封装
+
+
+### 1. 问题引入
+
+
+每个角色都有动画效果的帧序列，如何设计才能更好的复用动画效果加载的功能呢？
+
+
+
+### 2. 简介
+
+
+将动画效果类进行复用可以将其封装一个类，需要有动画效果的角色都可以包含该类对象，进行复用。
+
+
+
+### 3. 知识点
+
+
+类与类的包含关系，理解合成复用的设计原则。
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+实现玩家角色和NPC行走动画效果，4个方向
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#xhbh5)
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#G8lpq)
+
+#### 扩展任务
+
+
+无
+
+## 11 玩家角色键盘操控
+
+
+### 1. 问题引入
+
+
+玩家角色在游戏中不是自主运动的，而是由键盘或者鼠标来控制其运动，这是如何实现的？
+
+
+
+### 2. 简介
+
+
+由键盘控制玩家的移动，根据上下左右方向键控制玩家按相应方向进行运动。
+
+
+
+### 3. 知识点
+
+
++ Pygame事件处理机制 **<u>重点</u>**
++ Pygame键盘事件及类型的使用 **<u>重点</u>**
++ 关键代码
+
+
+
+```python
+while True:    
+    for event in pygame.event.get(): 
+        if event.type == QUIT:
+            exit()
+        if event.type == KEYDOWN:
+            if event.key == K_UP: 
+                  ……
+            elif event.key == K_DOWN: 
+                  ……
+            elif event.key == K_LEFT:
+                  ……
+            elif event.key == K_RIGHT:
+                  ……
+```
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+实现玩家角色键盘控制行走动画效果，4个方向
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#vzZgi)
+
+#### 扩展任务
+
+
+无
+
+## 12  NPC徘徊运动
+
+
+### 1. 问题引入
+
+
+NPC的运动一般会在某一区域徘徊，如何实现来回走动的？
+
+
+
+### 2. 简介
+
+
+通过记录下NPC走了多少步来控制NPC切换方向，如果原来向下的变成向上，原来向上的变成向下。
+
+
+
+### 3. 知识点
+
+
++ NPC的记步
++ if-elif的使用
++ NPC移动函数的封装
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+实现NPC两个方向的徘徊游走。
+
+
+
+#### 扩展任务
+
+
+实现NPC四个方向的徘徊游走。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#qzkuC)
+
+## 13 场景窗体与玩家的移动
+
+
+### 1. 问题引入
+
+
+显示窗体跟随玩家在大地图上移动是如何实现的？
+
+
+
+### 2. 简介
+
+
+RPG游戏往往地图比较大，显示的窗体是小于地图的，在玩家移动时，一般显示窗体会伴随玩家一起在大地图上移动，这一部分将实现该效果。
+
+
+
+### 3. 知识点
+
+
++ 玩家移动实现
++ 窗体移动实现 **<u>重点</u>**
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+实现玩家移动是视窗也随玩家在整个背景地图上移动。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#C6lga)
+
+#### 扩展任务
+
+
+进行边界的检测，包括视窗不能超过整个背景地图，和玩家不能超过背景地图。
+
+## 14 角色碰撞
+
+
+### 1. 问题引入
+
+
+玩家与NPC相遇后会有一些对话或者遇到妖怪要进行打斗，如何判断玩家与其他角色的相遇？
+
+
+
+### 2. 简介
+
+
+这部分将进行精灵与精灵之间的碰撞检测。
+
+
+
+### 3. 知识点
+
+
++ 两个精灵之间的矩形检测 **<u>重点</u>**
++ 两个精灵之间的圆检测
++ 两个精灵之间的像素遮罩检测  
+关键代码：
+
+
+
+```python
+pygame.sprite.collide_rect()
+pygame.sprite.collide_circle()
+pygame.sprite.collide_mask()
+```
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+实现两个精灵的矩形碰撞。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#B5jcF)
+
+#### 扩展任务
+
+
+尝试两个精灵的圆检测和遮罩检测
+
+## 15 玩家与障碍物的碰撞
+
+
+### 1. 问题引入
+
+
+在地图中如何保证玩家在正常的道路上移动，而不能在其他的地方乱走，如何实现的呢？
+
+
+
+### 2. 简介
+
+
+在这个部分中，地图中的道路两侧要进行障碍物设计，然后需要对障碍物与角色进行碰撞。以确保后续玩家只能走在路上，而不会穿越建筑物。
+
+
+
+### 3. 知识点
+
+
++ 精灵组创建生成
++ 精灵和组之间的矩形冲突检测
+
+
+
+```python
+pygame.sprite.spritecollide(sprite,sprite_group,bool)
+```
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#Lvy4e)
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+实现碰撞的小例程。
+
+
+
+#### 扩展任务
+
+
+能将该功能运用在游戏上。
+
+## 16 村庄场景封装
+
+
+### 1. 问题引入
+
+
+当前游戏中程序入口主python文件的一些要素太多，而当另外的场景出现时会更为复杂，这时候为了更好的复用，将采用什么方法进行设计？
+
+
+
+### 2. 简介
+
+
+在这个部分中，地图中的道路两侧要进行障碍物设计，然后需要对障碍物与角色进行碰撞。以确保后续玩家只能走在路上，而不会穿越建筑物。
+
+
+
+### 3. 知识点
+
+
++ 精灵组创建生成
++ 精灵和组之间的矩形冲突检测
+
+
+
+```python
+pygame.sprite.spritecollide(sprite,sprite_group,bool)
+```
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+实现碰撞的小例程。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#EFXNi)
+
+#### 扩展任务
+
+
+能将该功能运用在游戏上。
+
+## 17 玩家与NPC的碰撞
+
+
+### 1. 问题引入
+
+
+将前面两种碰撞功能加入到游戏当中应当放入到什么位置？
+
+
+
+### 2. 简介
+
+
+玩家与障碍物碰撞的工作应当放入到玩家类里，并控制玩家的运动，当碰到障碍物则即使在按键盘也不能移动。而玩家遇到土地公会引发游戏切换场景，所以应该放在场景的里面。
+
+
+
+### 3. 知识点
+
+
+面向对象的分析，都是碰撞但是实现和封装的位置是不一样的。
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+在游戏结构中加入这两个碰撞功能。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#J0o21)
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#ZFrxL)
+
+#### 扩展任务
+
+
+进而实现其他角色与障碍物的碰撞。
+
+## 18 对话框的实现
+
+
+### 1. 问题引入
+
+
+RPG游戏中经常出现角色之间的对话，这是怎么实现的？
+
+
+
+### 2. 简介
+
+
+分析出现对话框与对话框消失的条件，在相应的地方进行判断，并绘制对话框的图片。
+
+
+
+### 3. 知识点
+
+
++ Pygame文字绘制机制
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+在简单例子中完成对话框显示以及相应的文字显示。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#Ba5MU)
+
+#### 扩展任务
+
+
+将该功能加入游戏当中。
+
+## 19 场景切换渐入渐出单个例程
+
+
+### 1. 问题引入
+
+
+游戏当需要切换背景时往往有渐入渐出的效果，这是如何实现的？
+
+
+
+### 2. 简介
+
+
+使用图像的透明通道设置透明度，来实现渐入渐出的场景切换的效果。
+
+
+
+### 3. 知识点
+
+
++ RGBA色彩模式
++ A通道的值对图像的影响
++ alpha值越大图像越不透明，越小图像越透明。
+
+
+
+```python
+while True:
+    for event in pygame.event.get():
+        if event.type == 12:
+            pygame.quit()
+            sys.exit()    
+    if first:
+        image.set_alpha(255-i)
+    else:
+        image2.set_alpha(i)
+    window.fill((255, 255, 255))
+    window.blit(background, background.get_rect())
+    if first:
+        window.blit(image, window.get_rect())    
+    else:
+        window.blit(image2, window.get_rect())  
+    pygame.time.delay(20)
+    i+=1
+    if i==255:
+        i=1
+        first = not first
+    pygame.display.update()
+```
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+用一个例子呈现渐入渐出的场景切换效果。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#ykIhJ)
+
+#### 扩展任务
+
+
+将渐入渐出功能加入的游戏当中去。
+
+## 20 场景渐入渐出封装
+
+
+### 1. 问题引入
+
+
+场景渐入渐出功能如何设计，才能使得这个渐入渐出功能能够很好的复用？
+
+
+
+### 2. 简介
+
+
+可以采用合成复用原则，将渐入渐出功能封装成类，组合到我们村庄场景中去，这样在进入场景时候，切换场景时进行复用。并且设置场景状态根据状态的不同进行不同的alpha通道值的设置从而达到渐入渐出的效果，且方便后面第二个场景的复用。
+
+
+
+### 3. 知识点
+
+
++ 枚举类型的状态值设定
++ 有限状态机
++ 背景渐变状态机分析如图：
+
+<img src="https://cdn.nlark.com/yuque/0/2024/png/22579395/1716858899813-ffcbd98e-6d33-4d14-b1f3-4c90c3e7db0f.png" width="496" title="" crop="0,0,1,1" id="uad9f54fd" class="ne-image">
+
+```python
+class SceneStatus(enum.IntEnum):
+    In = 1
+    Normal = 2
+    Out = 3
+       
+class FadeScene:
+    def __init__(self, back_image: pygame.image):
+        self.back_image = back_image
+        self.alpha = 0
+        self.status = SceneStatus.In
+
+    def set_status(self, status: SceneStatus):
+        self.status = status
+        if status == SceneStatus.In:
+            self.alpha = 0
+        if status == SceneStatus.Normal:
+            self.alpha = 255
+        if status == SceneStatus.Out:
+            self.alpha = 0
+
+    def get_out(self):
+        if self.status == SceneStatus.Out and self.alpha == 255:
+            return True
+        else:
+            return False
+
+    def get_back_image(self, x: int, y: int):
+        if x < 0:
+            x = 0
+        if y < 0:
+            y = 0
+
+        if x > self.back_image.get_width() - 400:
+            x = self.back_image.get_width() - 400
+        if y > self.back_image.get_height() - 300:
+            y = self.back_image.get_height() - 300
+
+        temp_surface = self.back_image.subsurface((x, y, 800, 600))
+
+        if self.status == SceneStatus.Normal:
+            return temp_surface
+        elif self.status == SceneStatus.In:
+            temp_surface.set_alpha(self.alpha)
+            black_surface = pygame.Surface((800, 600))  # black_surface.fill((0, 0, 0))
+            black_surface.blit(temp_surface, (0, 0))  # 参数二为位置信息
+            self.alpha += 20
+            if self.alpha >= 255:
+                self.alpha = 0
+                self.status = SceneStatus.Normal
+            return black_surface
+        elif self.status == SceneStatus.Out:
+            temp_surface.set_alpha(255 - self.alpha)
+            black_surface = pygame.Surface((800, 600))  # black_surface.fill((0, 0, 0))
+            black_surface.blit(temp_surface, (0, 0))  # 参数二为位置信息
+            self.alpha += 20
+            if self.alpha >= 255:
+                self.alpha = 255
+            return black_surface
+```
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+将渐入渐出功能封装在村庄场景中。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#Aqmen)
+
+#### 扩展任务
+
+
+无
+
+## 21 第二个寺庙场景建立和渐入渐出实现
+
+
+### 1. 问题引入
+
+
+在RPG游戏中时常会进行场景的切换和变换，包括关卡切换，包括输赢状态切换等等，这些切换是如何实现的？
+
+
+
+### 2. 简介
+
+
+可以仿照村庄场景进行第二个寺庙场景的建立，在设计中可以利用场景的有限状态机来设计游戏中的各个不同的状态值，通过状态值的变化来进行场景的切换。
+
+
+
+### 3. 知识点
+
+
++ 有限状态机
++ 第二个场景建立  
+（1）模仿村庄场景建立寺庙场景  
+（2）注意孙悟空玩家信息的传递  
+（3）在入口程序中加入新的场景运行
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+分析设置场景的状态值，实现游戏场景的切换。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#vmvop)
+
+#### 扩展任务
+
+
+无
+
+## 22 怪物封装加载
+
+
+### 1. 问题引入
+
+
+第二个场景中怪物的位置是如何设置的，如何进行加载？
+
+
+
+### 2. 简介
+
+
+模仿村庄场景中土地公设计的情况进行怪物封装和加载
+
+
+
+### 3. 知识点
+
+
++ 复习村庄场景中土地公的设计
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+在代码中封装怪物
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#UN2HO)
+
+#### 扩展任务
+
+
+无
+
+## 23 玩家怪物打斗的设计封装
+
+
+### 1. 问题引入
+
+
+在寺庙场景中玩家在碰见怪物后会进行打斗，玩家由之前的行走变为打斗，如何设计实现？并且不改变之前的设计。
+
+
+
+### 2. 简介
+
+
+进一步增加玩家打斗类的设计，加上技能等相应动画效果的模块。
+
+
+
+### 3. 知识点
+
+
++ 玩家打斗状态分析
++ 状态图
+
+<img src="https://cdn.nlark.com/yuque/0/2024/png/22579395/1716858712276-81853b44-0d00-4006-b232-dd0018a1d23b.png" width="321" title="" crop="0,0,1,1" id="uce04d89a" class="ne-image">
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+增加玩家打斗类的设计
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#VmbQc)
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#O780G)
+
+#### 扩展任务
+
+
+无
+
+## 24 玩家与怪物打斗场景设计
+
+
+### 1. 问题引入
+
+
+在寺庙场景中如何加入玩家与怪物打斗的场景，如何设计打斗场景？
+
+
+
+### 2. 简介
+
+
+设计完成打斗场景，将打斗场景加入到寺庙场景中。
+
+
+
+### 3. 知识点
+
+
++ 类的组合关系使用
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+设计完成打斗场景类，并加入到寺庙场景，并在合适条件下绘制出打斗场景。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#e5yiL)
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#vtHwh)
+
+#### 扩展任务
+
+
+无
+
+## 25 声音和音效
+
+
+### 1. 问题引入
+
+
+如果让游戏有声音，更生动。
+
+
+
+### 2. 简介
+
+
+实现在游戏中的背景音乐播放和打斗的音效
+
+
+
+### 3. 知识点
+
+
+1.导入pygame库，并且初始化声音播放模块
+
+
+
+```plain
+pygame.mixer.init()
+```
+
+
+
+2.播放背景音乐
+
+
+
+```plain
+pygame.mixer.music.load() 
+pygame.mixer.music.play(-1) #-1参数控制无限循环一首背景音乐
+```
+
+
+
+3.播放音效
+
+
+
+```plain
+sound=pygame.mixer.Sound('')
+sound.play()
+```
+
+
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+给整个场景加上背景音乐和音效
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#Jra4o)
+
+#### 扩展任务
+
+
+无
+
+## 26游戏结构代码实现
+
+
+### 1. 问题引入
+
+
+具体在Python中游戏结构的代码是如何实现？
+
+
+
+### 2. 简介
+
+
+主要讲解具体每一个类的设计与实现，以及相应成员函数的设计实现。
+
+
+
+### 3. 知识点
+
+
++ 类的成员变量设计
++ 类的成员函数设计
++ 类与类直接的关联  
+<img src="en-resource://database/585:1" title="" crop="0,0,1,1" id="tZD30" class="ne-image"><img src="https://cdn.nlark.com/yuque/0/2024/png/22579395/1716858261938-0387ba6f-9f7a-4558-8cbf-67cb3bf1d6b8.png?x-oss-process=image%2Fcrop%2Cx_0%2Cy_5%2Cw_1134%2Ch_380" width="1134" title="" crop="0,0.0123,1,1" id="R1TWD" class="ne-image">
+
+### 4. 阶段小任务
+
+
+#### 基本任务
+
+
+理解整个游戏结构。
+
+[此处为语雀卡片，点击链接查看](https://www.yuque.com/yueguangguan/yklzm8/gmyf4uxzxghwme44#K3war)
+
+#### 扩展任务
+
+
+能按照游戏结构重构自己的制作的游戏。
+
+

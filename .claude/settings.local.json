@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install *)",
+      "Bash(where python3 *)",
+      "Read(//d/app/Python//**)",
+      "Read(//c/Program Files/**)",
+      "Bash(ls \"/c/Python\"*)",
+      "Bash(py --list)",
+      "Bash(curl *)",
+      "WebFetch(domain:www.python.org)",
+      "Bash(sort -t. -k3 -n)",
+      "Bash(/c/Users/Administrator/Desktop/python-3.12.10-amd64.exe *)",
+      "Bash(\"/c/Program Files/Python312/python.exe\" --version)",
+      "Bash(\"/c/Python312/python.exe\" --version)",
+      "Bash(where python3.12)",
+      "Bash(rm -rf .venv)",
+      "Bash(\"/c/Program Files/Python312/python.exe\" -m venv .venv)",
+      "Bash(python -c \"import pygame; print\\('pygame version:', pygame.__version__\\)\")"
+    ]
+  }
+}
